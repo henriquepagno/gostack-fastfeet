@@ -56,89 +56,46 @@ class RecipientController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string(),
-      street: Yup.string().test(
-        'oneOfRequired',
-        'State, city and zipcode are required fields.',
-        function() {
-          if (this.parent.street) {
-            return this.parent.state && this.parent.city && this.parent.zipcode;
-          }
-          return true;
-        }
-      ),
-      number: Yup.number(),
+      name: Yup.string().nullable(false),
+      street: Yup.string().nullable(false),
+      number: Yup.number().nullable(false),
       complement: Yup.string(),
       state: Yup.string()
         .min(2)
         .max(2)
-        .test(
-          'oneOfRequired',
-          'Street, city and zipcode are required fields.',
-          function() {
-            if (this.parent.state) {
-              return (
-                this.parent.street && this.parent.city && this.parent.zipcode
-              );
-            }
-            return true;
-          }
-        ),
-      city: Yup.string().test(
-        'oneOfRequired',
-        'Street, state and zipcode are required fields.',
-        function() {
-          if (this.parent.city) {
-            return (
-              this.parent.street && this.parent.state && this.parent.zipcode
-            );
-          }
-          return true;
-        }
-      ),
+        .nullable(false),
+      city: Yup.string().nullable(false),
       zipcode: Yup.string()
         .min(8)
         .max(8)
-        .test(
-          'oneOfRequired',
-          'Street, city and zipcode are required fields.',
-          function() {
-            if (this.parent.zipcode) {
-              return (
-                this.parent.street && this.parent.city && this.parent.state
-              );
-            }
-            return true;
-          }
-        ),
+        .nullable(false),
     });
-
-    try {
-      await schema.validate(req.body);
-    } catch (err) {
-      return res.status(400).json(err.errors);
-    }
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
     const { id } = req.params;
-    const { name } = req.body;
+    let { name } = req.body;
 
     const recipient = await Recipient.findByPk(id);
 
     if (!recipient) {
-      return res.status(400).json(`Recipient with id ${id} not found.`);
+      return res.status(400).json(`Recipient with id ${id} not found`);
     }
 
     if (name && name !== recipient.name) {
       const recipientExists = await Recipient.findOne({ where: { name } });
 
       if (recipientExists) {
-        return res.status(400).json({ error: 'Recipient already exists' });
+        return res
+          .status(400)
+          .json({ error: 'Recipient already exists with that name' });
       }
     }
+
+    // If the name wasn't sent in the request, get the name from the model to return.
+    name = name || recipient.name;
 
     const {
       street,
