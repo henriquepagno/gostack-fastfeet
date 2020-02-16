@@ -24,3 +24,6 @@ yarn-error.log*
 
 # dotenv environment variables file
 .env
+
+# ignore temporary folder files
+/tmp/uploads/*

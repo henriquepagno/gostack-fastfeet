@@ -81,7 +81,9 @@ class RecipientController {
     const recipient = await Recipient.findByPk(id);
 
     if (!recipient) {
-      return res.status(400).json(`Recipient with id ${id} not found`);
+      return res
+        .status(400)
+        .json({ error: `Recipient with id ${id} not found` });
     }
 
     if (name && name !== recipient.name) {
