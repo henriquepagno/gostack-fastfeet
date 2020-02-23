@@ -13,7 +13,7 @@ class Mail {
       host,
       port,
       secure,
-      auth: auth.User ? auth : null,
+      auth: auth.user ? auth : null,
     });
 
     this.configureTemplates();
