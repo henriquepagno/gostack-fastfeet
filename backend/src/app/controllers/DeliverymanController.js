@@ -5,9 +5,13 @@ import File from '../models/File';
 
 class DeliverymanController {
   async index(req, res) {
-    const deliveryman = await Deliveryman.findAll({
+    const page = req.query.page || 1;
+
+    const deliverymans = await Deliveryman.findAndCountAll({
       order: ['name'],
       attributes: ['id', 'name', 'email'],
+      limit: 20,
+      offset: (page - 1) * 20,
       include: [
         {
           model: File,
@@ -17,7 +21,9 @@ class DeliverymanController {
       ],
     });
 
-    return res.json(deliveryman);
+    const totalPages = Math.ceil(deliverymans.count / 20);
+
+    return res.json({ ...deliverymans, totalPages });
   }
 
   async store(req, res) {
