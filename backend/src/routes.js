@@ -10,6 +10,7 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import AvatarController from './app/controllers/AvatarController';
 import NotificationController from './app/controllers/NotificationController';
 import DeliveryController from './app/controllers/DeliveryController';
+import GetDeliveryController from './app/controllers/GetDeliveryController';
 
 const routes = new Router();
 const upload = multer(multerconfig);
@@ -34,6 +35,11 @@ routes.get('/deliveries', DeliveryController.index);
 routes.post('/deliveries', DeliveryController.store);
 routes.put('/deliveries/:id', DeliveryController.update);
 routes.delete('/deliveries/:id', DeliveryController.delete);
+
+routes.get(
+  '/deliveries/deliveryman/:deliverymanId/deliveries',
+  GetDeliveryController.index
+);
 
 // Notification
 routes.get('/notifications/:deliverymanId', NotificationController.index);
