@@ -11,6 +11,9 @@ import AvatarController from './app/controllers/AvatarController';
 import NotificationController from './app/controllers/NotificationController';
 import DeliveryController from './app/controllers/DeliveryController';
 import GetDeliveryController from './app/controllers/GetDeliveryController';
+import WithdrawalDeliveryController from './app/controllers/WithdrawalDeliveryController';
+import CompleteDeliveryController from './app/controllers/CompleteDeliveryController';
+import SignatureController from './app/controllers/SignatureController';
 
 const routes = new Router();
 const upload = multer(multerconfig);
@@ -41,15 +44,31 @@ routes.get(
   GetDeliveryController.index
 );
 
+routes.put(
+  '/deliveries/withdrawal/:deliveryId',
+  WithdrawalDeliveryController.update
+);
+
+routes.put(
+  '/deliveries/complete/:deliveryId',
+  CompleteDeliveryController.update
+);
+
 // Notification
 routes.get('/notifications/:deliverymanId', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
 
 // File
 routes.post(
-  '/avatars/:deliverymanId',
+  '/deliverymans/:deliverymanId/avatar',
   upload.single('file'),
   AvatarController.store
+);
+
+routes.post(
+  '/deliveries/:deliveryId/signature',
+  upload.single('file'),
+  SignatureController.store
 );
 
 export default routes;
