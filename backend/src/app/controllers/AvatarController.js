@@ -11,7 +11,7 @@ class AvatarController {
     if (!deliveryman) {
       return res
         .status(400)
-        .json({ error: `Deliveryman with id ${deliverymanId} not found` });
+        .json({ error: `Deliveryman with id ${deliverymanId} not found.` });
     }
 
     const file = await File.create({
