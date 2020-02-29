@@ -43,11 +43,9 @@ class WithdrawalDeliveryController {
     });
 
     if (!delivery) {
-      return res
-        .status(400)
-        .json(
-          `Delivery with id ${deliveryId} for deliveryman with id ${req.body.deliverymanId} not found.`
-        );
+      return res.status(400).json({
+        error: `Delivery with id ${deliveryId} for deliveryman with id ${req.body.deliverymanId} not found.`,
+      });
     }
 
     // Check if time is betweeen 08:00 and 18:00
@@ -55,9 +53,9 @@ class WithdrawalDeliveryController {
     const finalTime = setSeconds(setMinutes(setHours(date, '18'), '00'), 0);
 
     if (isBefore(date, firstTime) || isAfter(date, finalTime)) {
-      return res
-        .status(401)
-        .json('Withdrawls can only be made between 08:00 and 18:00.');
+      return res.status(401).json({
+        error: 'Withdrawls can only be made between 08:00 and 18:00.',
+      });
     }
 
     // Check how many withdrawals have already been made in the current day
@@ -71,14 +69,14 @@ class WithdrawalDeliveryController {
     });
 
     if (deliveries >= 5) {
-      return res
-        .status(401)
-        .json("You can't withdraw more than five deliveries per day.");
+      return res.status(401).json({
+        error: "You can't withdraw more than five deliveries per day.",
+      });
     }
 
     // Check if delivery has already been collected
     if (delivery.start_date) {
-      return res.status(401).json('Delivery already withdrawn.');
+      return res.status(401).json({ error: 'Delivery already withdrawn.' });
     }
 
     await delivery.update({ start_date: date });

@@ -32,16 +32,14 @@ class CompleteDeliveryController {
     });
 
     if (!delivery) {
-      return res
-        .status(400)
-        .json(
-          `Delivery with id ${deliveryId} for deliveryman with id ${req.body.deliverymanId} not found.`
-        );
+      return res.status(400).json({
+        error: `Delivery with id ${deliveryId} for deliveryman with id ${req.body.deliverymanId} not found.`,
+      });
     }
 
     // Check if delivery has already been finished
     if (delivery.end_date) {
-      return res.status(401).json('Delivery already finished.');
+      return res.status(401).json({ error: 'Delivery already finished.' });
     }
 
     await delivery.update({ end_date: new Date() });
