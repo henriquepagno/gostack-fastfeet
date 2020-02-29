@@ -15,6 +15,12 @@ class DeliveryConfirmationMail {
       context: {
         deliveryman: deliveryman.name,
         recipient: recipient.name,
+        street: recipient.street,
+        number: recipient.number,
+        complement: recipient.complement,
+        state: recipient.state,
+        city: recipient.city,
+        zipcode: recipient.zipcode,
         product: delivery.product,
       },
     });

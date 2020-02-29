@@ -120,7 +120,9 @@ class DeliveryController {
     const delivery = await Delivery.findByPk(id);
 
     if (!delivery) {
-      return res.status(400).json(`Delivery with id ${id} not found.`);
+      return res
+        .status(400)
+        .json({ error: `Delivery with id ${id} not found.` });
     }
 
     // Check if recipient exists

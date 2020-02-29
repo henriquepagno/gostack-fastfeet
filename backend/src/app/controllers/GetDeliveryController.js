@@ -23,6 +23,7 @@ class GetDeliveryController {
         'signature_id',
         'start_date',
         'end_date',
+        'canceled_at',
       ],
       limit: 20,
       offset: (page - 1) * 20,

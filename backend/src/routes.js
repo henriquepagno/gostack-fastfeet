@@ -14,6 +14,9 @@ import GetDeliveryController from './app/controllers/GetDeliveryController';
 import WithdrawalDeliveryController from './app/controllers/WithdrawalDeliveryController';
 import CompleteDeliveryController from './app/controllers/CompleteDeliveryController';
 import SignatureController from './app/controllers/SignatureController';
+import GetDeliveriesProblemsController from './app/controllers/GetDeliveriesProblemsController';
+import GetDeliveryProblemController from './app/controllers/GetDeliveryProblemController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 const routes = new Router();
 const upload = multer(multerconfig);
@@ -52,6 +55,21 @@ routes.put(
 routes.put(
   '/deliveries/complete/:deliveryId',
   CompleteDeliveryController.update
+);
+
+routes.get('/deliveries/problems', GetDeliveriesProblemsController.index);
+
+routes.get(
+  '/delivery/:deliveryId/problems',
+  GetDeliveryProblemController.index
+);
+
+// DeliveryProblems
+routes.post('/delivery/:deliveryId/problems', DeliveryProblemController.store);
+
+routes.delete(
+  '/problem/:deliveryProblemId/cancel-delivery',
+  DeliveryProblemController.delete
 );
 
 // Notification
