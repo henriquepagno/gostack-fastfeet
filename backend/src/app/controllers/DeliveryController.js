@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import * as Yup from 'yup';
 
 import Delivery from '../models/Delivery';
@@ -13,7 +14,12 @@ class DeliveryController {
   async index(req, res) {
     const page = req.query.page || 1;
 
+    const whereStatement = req.query.q
+      ? { product: { [Op.iLike]: `%${req.query.q}%` } }
+      : null;
+
     const deliveries = await Delivery.findAndCountAll({
+      where: whereStatement,
       order: ['id'],
       attributes: [
         'id',
