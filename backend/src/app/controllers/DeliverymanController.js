@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import * as Yup from 'yup';
 
 import Deliveryman from '../models/Deliveryman';
@@ -7,7 +8,12 @@ class DeliverymanController {
   async index(req, res) {
     const page = req.query.page || 1;
 
+    const whereStatement = req.query.q
+      ? { name: { [Op.iLike]: `%${req.query.q}%` } }
+      : null;
+
     const deliverymans = await Deliveryman.findAndCountAll({
+      where: whereStatement,
       order: ['name'],
       attributes: ['id', 'name', 'email'],
       limit: 20,
@@ -75,12 +81,14 @@ class DeliverymanController {
     }
 
     if (email && email !== deliveryman.email) {
-      const deliverymanExists = await Deliveryman.findOne({ where: { email } });
+      const deliverymanExists = await Deliveryman.findOne({
+        where: { email },
+      });
 
       if (deliverymanExists) {
-        return res
-          .status(400)
-          .json({ error: 'Deliveryman already exists with that email' });
+        return res.status(400).json({
+          error: 'Deliveryman already exists with that email',
+        });
       }
     }
 

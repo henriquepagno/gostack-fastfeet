@@ -1,7 +1,38 @@
+import { Op } from 'sequelize';
 import * as Yup from 'yup';
+
 import Recipient from '../models/Recipient';
 
 class RecipientController {
+  async index(req, res) {
+    const page = req.query.page || 1;
+
+    const whereStatement = req.query.q
+      ? { name: { [Op.iLike]: `%${req.query.q}%` } }
+      : null;
+
+    const recipients = await Recipient.findAndCountAll({
+      where: whereStatement,
+      order: ['id'],
+      attributes: [
+        'id',
+        'name',
+        'street',
+        'number',
+        'complement',
+        'state',
+        'city',
+        'zipcode',
+      ],
+      limit: 20,
+      offset: (page - 1) * 20,
+    });
+
+    const totalPages = Math.ceil(recipients.count / 20);
+
+    return res.json({ ...recipients, totalPages });
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -87,7 +118,9 @@ class RecipientController {
     }
 
     if (name && name !== recipient.name) {
-      const recipientExists = await Recipient.findOne({ where: { name } });
+      const recipientExists = await Recipient.findOne({
+        where: { name },
+      });
 
       if (recipientExists) {
         return res
