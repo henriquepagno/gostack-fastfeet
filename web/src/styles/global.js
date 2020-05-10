@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -38,5 +38,21 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  header {
+    font-weight: bold;
+    font-size: 22px;
+    color: #333;
+  }
+`;
+
+export const Content = styled.div`
+  margin: 50px 150px auto;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    margin-bottom: 20px;
   }
 `;

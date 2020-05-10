@@ -30,9 +30,10 @@ class DeliveryController {
         'canceled_at',
         'start_date',
         'end_date',
+        'status',
       ],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: 8,
+      offset: (page - 1) * 8,
       include: [
         {
           model: File,
@@ -42,17 +43,22 @@ class DeliveryController {
         {
           model: Deliveryman,
           as: 'deliveryman',
-          attributes: ['id', 'name', 'email'],
+          attributes: ['id', 'name', 'email', 'avatar_id'],
+          include: {
+            model: File,
+            as: 'avatar',
+            attributes: ['name', 'path', 'url'],
+          },
         },
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city', 'state'],
         },
       ],
     });
 
-    const totalPages = Math.ceil(deliveries.count / 20);
+    const totalPages = Math.ceil(deliveries.count / 8);
 
     return res.json({ ...deliveries, totalPages });
   }
