@@ -24,7 +24,7 @@ export const StyledDialogContentText = styled(DialogContentText)`
 
 export const StyledButton = styled(Button)`
   && {
-    color: ${(props) => (props.primary ? '#8e5be8' : '#b2b2b2')};
+    color: ${(props) => (props.primary === 'true' ? '#8e5be8' : '#b2b2b2')};
     font: 14px 'Roboto', sans-serif;
   }
 `;

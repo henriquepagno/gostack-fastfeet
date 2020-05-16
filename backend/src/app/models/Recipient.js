@@ -11,6 +11,14 @@ class Recipient extends Model {
         state: Sequelize.STRING(2),
         city: Sequelize.STRING,
         zipcode: Sequelize.STRING(8),
+        formatted_zipcode: {
+          type: Sequelize.VIRTUAL(Sequelize.STRING, ['zipcode']),
+          get() {
+            const zipcode = this.get('zipcode');
+            const regex = /([0-9]{5})([0-9]{3})/gm;
+            return zipcode.replace(regex, '$1-$2');
+          },
+        },
       },
       {
         sequelize,

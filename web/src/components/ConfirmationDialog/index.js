@@ -41,7 +41,7 @@ export default function ConfirmDialog(props) {
             Não
           </StyledButton>
           <StyledButton
-            primary
+            primary="true"
             onClick={handleConfirm}
             color="primary"
             autoFocus
