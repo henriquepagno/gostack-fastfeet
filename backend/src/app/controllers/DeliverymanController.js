@@ -6,7 +6,7 @@ import File from '../models/File';
 
 class DeliverymanController {
   async index(req, res) {
-    const page = req.query.page || 1;
+    const { page } = req.query;
 
     const whereStatement = req.query.q
       ? { name: { [Op.iLike]: `%${req.query.q}%` } }
@@ -16,8 +16,8 @@ class DeliverymanController {
       where: whereStatement,
       order: ['name'],
       attributes: ['id', 'name', 'email'],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: page ? 20 : null,
+      offset: page ? (page - 1) * 20 : null,
       include: [
         {
           model: File,

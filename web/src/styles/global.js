@@ -56,3 +56,9 @@ export const Content = styled.div`
     margin-bottom: 20px;
   }
 `;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;

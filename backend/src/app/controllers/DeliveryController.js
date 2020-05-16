@@ -53,7 +53,16 @@ class DeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name', 'city', 'state'],
+          attributes: [
+            'id',
+            'name',
+            'city',
+            'state',
+            'number',
+            'street',
+            'zipcode',
+            'formatted_zipcode',
+          ],
         },
       ],
     });
@@ -61,6 +70,26 @@ class DeliveryController {
     const totalPages = Math.ceil(deliveries.count / 8);
 
     return res.json({ ...deliveries, totalPages });
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const delivery = await Delivery.findByPk(id, {
+      include: [
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['id', 'name'],
+        },
+      ],
+    });
+    return res.json(delivery);
   }
 
   async store(req, res) {

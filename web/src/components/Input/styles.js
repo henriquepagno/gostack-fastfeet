@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 315px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -19,12 +18,12 @@ export const Container = styled.div`
     border-radius: 4px;
     height: 44px;
     padding: 0 15px;
-    color: #000;
+    color: #8e8e8e;
     margin: 0 0 10px;
     width: 100%;
 
     &::placeholder {
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(0, 0, 0, 0.4);
     }
   }
 

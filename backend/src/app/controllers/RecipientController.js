@@ -5,7 +5,7 @@ import Recipient from '../models/Recipient';
 
 class RecipientController {
   async index(req, res) {
-    const page = req.query.page || 1;
+    const { page } = req.query;
 
     const whereStatement = req.query.q
       ? { name: { [Op.iLike]: `%${req.query.q}%` } }
@@ -24,8 +24,8 @@ class RecipientController {
         'city',
         'zipcode',
       ],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: page ? 20 : null,
+      offset: page ? (page - 1) * 20 : null,
     });
 
     const totalPages = Math.ceil(recipients.count / 20);

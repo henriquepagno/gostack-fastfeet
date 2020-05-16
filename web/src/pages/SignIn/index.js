@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import Input from './Input';
+import Input from '~/components/Input';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 

@@ -9,7 +9,12 @@ import ActionsMenu from '~/components/ActionsMenu';
 
 import { AvatarWrapper } from './styles';
 
-export default function DeliveriesBody({ data, handleDelete }) {
+export default function DeliveriesBody({
+  data,
+  handleOpen,
+  handleEdit,
+  handleDelete,
+}) {
   return (
     <tbody>
       {data.map((delivery) => (
@@ -36,11 +41,11 @@ export default function DeliveriesBody({ data, handleDelete }) {
           </td>
           <td>
             <ActionsMenu>
-              <button type="button">
+              <button type="button" onClick={() => handleOpen(delivery)}>
                 <BsEyeFill size={16} color="#8e5be8" />
                 <span>Visualizar</span>
               </button>
-              <button type="button">
+              <button type="button" onClick={() => handleEdit(delivery.id)}>
                 <BsPencil size={16} color="#4d85ee" />
                 <span>Editar</span>
               </button>
@@ -58,5 +63,7 @@ export default function DeliveriesBody({ data, handleDelete }) {
 
 DeliveriesBody.propTypes = {
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  handleOpen: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };
