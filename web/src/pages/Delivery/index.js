@@ -100,6 +100,7 @@ export default function Delivery() {
           </ButtonsWrapper>
           {deliveries && (
             <Table
+              type="Deliveries"
               data={deliveries}
               handleOpen={handleOpen}
               handleEdit={handleEdit}
