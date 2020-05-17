@@ -7,7 +7,8 @@ import SignIn from '~/pages/SignIn';
 import Delivery from '~/pages/Delivery';
 import ManageDelivery from '~/pages/Delivery/ManageDelivery';
 
-import Deliverymen from '~/pages/Deliverymen';
+import Deliveryman from '~/pages/Deliveryman';
+import ManageDeliverymen from '~/pages/Deliveryman/ManageDeliveryman';
 
 export default function Routes() {
   return (
@@ -18,7 +19,9 @@ export default function Routes() {
       <Route path="/deliveries/new" component={ManageDelivery} isPrivate />
       <Route path="/deliveries/:id" component={ManageDelivery} isPrivate />
 
-      <Route path="/deliverymen" exact component={Deliverymen} isPrivate />
+      <Route path="/deliverymen" exact component={Deliveryman} isPrivate />
+      <Route path="/deliverymen/new" component={ManageDeliverymen} isPrivate />
+      <Route path="/deliverymen/:id" component={ManageDeliverymen} isPrivate />
     </Switch>
   );
 }

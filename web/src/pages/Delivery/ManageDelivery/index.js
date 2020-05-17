@@ -11,12 +11,9 @@ import ReactSelect from '~/components/ReactSelect';
 import history from '~/services/history';
 import api from '~/services/api';
 
-import {
-  Container,
-  HeaderWrapper,
-  ButtonsWrapper,
-  Content,
-} from '~/styles/form';
+import { Container, HeaderWrapper, ButtonsWrapper } from '~/styles/form';
+
+import { Content } from './styles';
 
 export default function ManageDelivery() {
   const [isLoading, setIsLoading] = useState(false);
@@ -151,11 +148,9 @@ export default function ManageDelivery() {
   return (
     <Container>
       <HeaderWrapper>
-        {deliveryId ? (
-          <header>Edição de encomendas</header>
-        ) : (
-          <header>Cadastro de encomendas</header>
-        )}
+        <header>
+          {deliveryId ? 'Edição de encomendas' : 'Cadastro de encomendas'}
+        </header>
         <ButtonsWrapper>
           <PageButton
             icon="Back"

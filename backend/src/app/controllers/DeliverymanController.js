@@ -16,8 +16,8 @@ class DeliverymanController {
       where: whereStatement,
       order: ['name'],
       attributes: ['id', 'name', 'email'],
-      limit: page ? 20 : null,
-      offset: page ? (page - 1) * 20 : null,
+      limit: page ? 8 : null,
+      offset: page ? (page - 1) * 8 : null,
       include: [
         {
           model: File,
@@ -27,9 +27,25 @@ class DeliverymanController {
       ],
     });
 
-    const totalPages = Math.ceil(deliverymans.count / 20);
+    const totalPages = Math.ceil(deliverymans.count / 8);
 
     return res.json({ ...deliverymans, totalPages });
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const deliveryman = await Deliveryman.findByPk(id, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(deliveryman);
   }
 
   async store(req, res) {
