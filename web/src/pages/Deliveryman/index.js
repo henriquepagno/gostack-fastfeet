@@ -12,7 +12,7 @@ import api from '~/services/api';
 
 import { Content, ButtonsWrapper } from '~/styles/global';
 
-export default function Deliverymen() {
+export default function Deliveryman() {
   const [deliverymen, setDeliverymen] = useState();
   const [totalPages, setTotalPages] = useState();
   const [page, setPage] = useState(1);
