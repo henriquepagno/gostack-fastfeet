@@ -33,6 +33,14 @@ class RecipientController {
     return res.json({ ...recipients, totalPages });
   }
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+
+    return res.json(recipient);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -151,6 +159,22 @@ class RecipientController {
       city,
       zipcode,
     });
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+
+    if (!recipient) {
+      return res
+        .status(400)
+        .json({ error: `Recipient with id ${id} not found.` });
+    }
+
+    await recipient.destroy();
+
+    return res.json();
   }
 }
 

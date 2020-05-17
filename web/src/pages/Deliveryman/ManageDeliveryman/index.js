@@ -51,7 +51,7 @@ export default function ManageDeliveryman() {
           await handleAvatar(data.avatar, deliverymanId);
         }
 
-        toast.success('Entregador atualizada com sucesso');
+        toast.success('Entregador atualizado com sucesso');
         history.push('/deliverymen');
       } else {
         const res = await api.post('deliverymen', { name, email });
@@ -60,7 +60,7 @@ export default function ManageDeliveryman() {
           await handleAvatar(data.avatar, res.data.id);
         }
 
-        toast.success('Entregador cadastrada com sucesso');
+        toast.success('Entregador cadastrado com sucesso');
         history.push(`/deliverymen/${res.data.id}`);
       }
     } catch (err) {
@@ -101,9 +101,7 @@ export default function ManageDeliveryman() {
     <Container>
       <HeaderWrapper>
         <header>
-          {deliverymanId
-            ? 'Edição de entregadores'
-            : 'Cadastro de entregadores'}
+          {deliverymanId ? 'Edição de entregador' : 'Cadastro de entregador'}
         </header>
         <ButtonsWrapper>
           <PageButton

@@ -149,7 +149,7 @@ export default function ManageDelivery() {
     <Container>
       <HeaderWrapper>
         <header>
-          {deliveryId ? 'Edição de encomendas' : 'Cadastro de encomendas'}
+          {deliveryId ? 'Edição de encomenda' : 'Cadastro de encomenda'}
         </header>
         <ButtonsWrapper>
           <PageButton

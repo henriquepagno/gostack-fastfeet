@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import DeliveriesHeader from './Header/Deliveries';
 import DeliverymenHeader from './Header/Deliverymen';
+import RecipientsHeader from './Header/Recipients';
 
 import DeliveriesBody from './Body/Deliveries';
 import DeliverymenBody from './Body/Deliverymen';
+import RecipientsBody from './Body/Recipients';
 
 import { Container } from './styles';
 
@@ -33,6 +35,16 @@ export default function Table({
         <>
           <DeliverymenHeader />
           <DeliverymenBody
+            data={data}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
+        </>
+      )}
+      {type === 'Recipients' && (
+        <>
+          <RecipientsHeader />
+          <RecipientsBody
             data={data}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
