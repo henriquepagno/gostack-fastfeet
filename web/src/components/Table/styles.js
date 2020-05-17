@@ -13,6 +13,7 @@ export const Container = styled.table`
       border: 1px solid #eee;
       border-style: solid none;
       padding: 8px 0px;
+      height: 53px;
     }
 
     td:first-child {
