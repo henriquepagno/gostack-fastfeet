@@ -12,11 +12,11 @@ class GetDeliveryProblemController {
       },
       order: ['id'],
       attributes: ['id', 'description'],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: 8,
+      offset: (page - 1) * 8,
     });
 
-    const totalPages = Math.ceil(deliveryProblems.count / 20);
+    const totalPages = Math.ceil(deliveryProblems.count / 8);
 
     return res.json({ ...deliveryProblems, totalPages });
   }

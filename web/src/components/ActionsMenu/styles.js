@@ -14,8 +14,8 @@ export const ButtonWrapper = styled.button`
 export const ActionList = styled.div`
   position: absolute;
   background: #fff;
-  width: 150px;
-  left: calc(50% - 90px);
+  width: 210px;
+  left: calc(50% - 122px);
   top: calc(100% + 5px);
   border-radius: 4px;
   padding: 15px 5px;

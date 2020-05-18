@@ -1,34 +1,27 @@
-import { Op, literal } from 'sequelize';
-
 import Delivery from '../models/Delivery';
-import Recipient from '../models/Recipient';
+import DeliveryProblems from '../models/DeliveryProblems';
 
 class GetDeliveriesProblemsController {
   async index(req, res) {
     const page = req.query.page || 1;
 
-    const deliveries = await Delivery.findAndCountAll({
-      where: {
-        [Op.and]: literal(
-          `exists (select 1 from "delivery_problems" AS "DeliverProblems" where "DeliverProblems"."delivery_id" = "Delivery"."id")`
-        ),
-      },
+    const problems = await DeliveryProblems.findAndCountAll({
       order: ['id'],
-      attributes: ['id', 'product', 'recipient_id', 'start_date', 'end_date'],
-      limit: 20,
-      offset: (page - 1) * 20,
+      attributes: ['id', 'description'],
+      limit: 8,
+      offset: (page - 1) * 8,
       include: [
         {
-          model: Recipient,
-          as: 'recipient',
-          attributes: ['id', 'name'],
+          model: Delivery,
+          as: 'delivery',
+          attributes: ['id'],
         },
       ],
     });
 
-    const totalPages = Math.ceil(deliveries.count / 20);
+    const totalPages = Math.ceil(problems.count / 8);
 
-    return res.json({ ...deliveries, totalPages });
+    return res.json({ ...problems, totalPages });
   }
 }
 

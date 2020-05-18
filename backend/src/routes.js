@@ -41,6 +41,8 @@ routes.put('/deliverymen/:id', DeliverymanController.update);
 routes.delete('/deliverymen/:id', DeliverymanController.delete);
 
 // Delivery
+routes.get('/deliveries/problems', GetDeliveriesProblemsController.index);
+
 routes.get('/deliveries', DeliveryController.index);
 routes.get('/deliveries/:id', DeliveryController.show);
 routes.post('/deliveries', DeliveryController.store);
@@ -61,8 +63,6 @@ routes.put(
   '/deliveries/complete/:deliveryId',
   CompleteDeliveryController.update
 );
-
-routes.get('/deliveries/problems', GetDeliveriesProblemsController.index);
 
 routes.get(
   '/delivery/:deliveryId/problems',
