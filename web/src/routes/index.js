@@ -13,6 +13,8 @@ import ManageDeliverymen from '~/pages/Deliveryman/ManageDeliveryman';
 import Recipient from '~/pages/Recipient';
 import ManageRecipient from '~/pages/Recipient/ManageRecipient';
 
+import Problem from '~/pages/Problem';
+
 export default function Routes() {
   return (
     <Switch>
@@ -29,6 +31,8 @@ export default function Routes() {
       <Route path="/recipients" exact component={Recipient} isPrivate />
       <Route path="/recipients/new" component={ManageRecipient} isPrivate />
       <Route path="/recipients/:id" component={ManageRecipient} isPrivate />
+
+      <Route path="/problems" exact component={Problem} isPrivate />
     </Switch>
   );
 }
