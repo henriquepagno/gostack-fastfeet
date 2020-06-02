@@ -8,15 +8,10 @@ import api from '~/services/api';
 
 export function* signIn({ payload }) {
   try {
-    console.tron.log('signIn');
     const { email, password } = payload;
-
-    console.tron.log('email', email);
-    console.tron.log('password', password);
 
     const response = yield call(api.post, 'sessions', { email, password });
 
-    console.tron.log(response);
     const { token, user } = response.data;
 
     api.defaults.headers.Authorization = `Bearer ${token}`;

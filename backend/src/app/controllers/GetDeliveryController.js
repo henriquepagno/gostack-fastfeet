@@ -11,7 +11,7 @@ class GetDeliveryController {
 
     const whereStatement = { deliveryman_id: req.params.deliverymanId };
 
-    whereStatement.end_date = delivered ? { [Op.ne]: null } : null;
+    whereStatement.end_date = delivered === 'true' ? { [Op.ne]: null } : null;
 
     const deliveries = await Delivery.findAndCountAll({
       where: whereStatement,
@@ -24,9 +24,11 @@ class GetDeliveryController {
         'start_date',
         'end_date',
         'canceled_at',
+        'createdAt',
+        'status',
       ],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: 4,
+      offset: (page - 1) * 4,
       include: [
         {
           model: File,
@@ -36,12 +38,12 @@ class GetDeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city'],
         },
       ],
     });
 
-    const totalPages = Math.ceil(deliveries.count / 20);
+    const totalPages = Math.ceil(deliveries.count / 4);
 
     return res.json({ ...deliveries, totalPages });
   }

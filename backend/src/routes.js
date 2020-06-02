@@ -23,6 +23,13 @@ const upload = multer(multerconfig);
 
 routes.post('/sessions', SessionController.store);
 
+routes.get('/deliverymen/:id', DeliverymanController.show);
+
+routes.get(
+  '/deliveries/deliveryman/:deliverymanId/deliveries',
+  GetDeliveryController.index
+);
+
 // Defines global authorization middleware to the following routes below.
 routes.use(authMiddleware);
 
@@ -35,7 +42,6 @@ routes.delete('/recipients/:id', RecipientController.delete);
 
 // Deliveryman
 routes.get('/deliverymen', DeliverymanController.index);
-routes.get('/deliverymen/:id', DeliverymanController.show);
 routes.post('/deliverymen', DeliverymanController.store);
 routes.put('/deliverymen/:id', DeliverymanController.update);
 routes.delete('/deliverymen/:id', DeliverymanController.delete);
@@ -48,11 +54,6 @@ routes.get('/deliveries/:id', DeliveryController.show);
 routes.post('/deliveries', DeliveryController.store);
 routes.put('/deliveries/:id', DeliveryController.update);
 routes.delete('/deliveries/:id', DeliveryController.delete);
-
-routes.get(
-  '/deliveries/deliveryman/:deliverymanId/deliveries',
-  GetDeliveryController.index
-);
 
 routes.put(
   '/deliveries/withdrawal/:deliveryId',

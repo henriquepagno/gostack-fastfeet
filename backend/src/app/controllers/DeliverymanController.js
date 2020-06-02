@@ -45,6 +45,12 @@ class DeliverymanController {
       ],
     });
 
+    if (!deliveryman) {
+      return res
+        .status(400)
+        .json({ error: `Deliveryman with id ${id} not found` });
+    }
+
     return res.json(deliveryman);
   }
 
