@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Container, Checkpoint, Point, Label, Connector } from './styles';
 
 export default function Status({ status }) {
-  let withdrawalStatus = false;
-  let deliveryStatus = false;
+  const [withdrawalStatus, setWithdrawalStatus] = useState(false);
+  const [deliveryStatus, setDeliveryStatus] = useState(false);
 
-  if (status === 'Delivered') {
-    withdrawalStatus = true;
-    deliveryStatus = true;
-  }
+  useEffect(() => {
+    if (status === 'Delivered') {
+      setWithdrawalStatus(true);
+      setDeliveryStatus(true);
+    }
 
-  if (status === 'Withdrawn') {
-    withdrawalStatus = true;
-  }
+    if (status === 'Withdrawn') {
+      setWithdrawalStatus(true);
+    }
+  }, [status]);
 
   return (
     <Container>

@@ -11,6 +11,8 @@ class GetDeliveryController {
 
     const whereStatement = { deliveryman_id: req.params.deliverymanId };
 
+    whereStatement.canceled_at = null;
+
     whereStatement.end_date = delivered === 'true' ? { [Op.ne]: null } : null;
 
     const deliveries = await Delivery.findAndCountAll({
@@ -38,7 +40,16 @@ class GetDeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name', 'city'],
+          attributes: [
+            'id',
+            'name',
+            'city',
+            'state',
+            'number',
+            'street',
+            'zipcode',
+            'formatted_zipcode',
+          ],
         },
       ],
     });

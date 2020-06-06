@@ -1,10 +1,12 @@
 import styled from 'styled-components/native';
 
+import Colors from '~/styles/Constants';
+
 export const Container = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  border: 2px solid #f0f2f8;
+  border: 2px solid ${Colors.lightGray};
   margin-bottom: 20px;
 `;
 
@@ -21,14 +23,14 @@ export const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
   margin-left: 10px;
-  color: #7d40e7;
+  color: ${Colors.purple};
 `;
 
 export const InfoContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  background: #f0f2f8;
+  background: ${Colors.lightGray};
   align-items: center;
   height: 70px;
 `;
@@ -40,12 +42,13 @@ export const DataContainer = styled.View`
 
 export const Label = styled.Text`
   font-size: 12px;
-  color: #666;
+  color: ${Colors.darkGray};
 `;
 
 export const Data = styled.Text`
   font-size: 14px;
   font-weight: bold;
+  color: ${Colors.lightBlack};
 `;
 
 export const DetailsButton = styled.TouchableOpacity`
@@ -58,5 +61,5 @@ export const DetailsButtonText = styled.Text`
   font-weight: bold;
   margin: auto;
   line-height: 15px;
-  color: #7d40e7;
+  color: ${Colors.purple};
 `;

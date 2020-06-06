@@ -1,11 +1,13 @@
 import styled, { css } from 'styled-components/native';
 
+import Colors from '~/styles/Constants';
+
 export const Background = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${Colors.white};
 `;
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -25,14 +27,14 @@ export const GreetingContainer = styled.View`
 `;
 
 export const Greeting = styled.Text`
-  color: #666;
+  color: ${Colors.gray};
   font-size: 14px;
 `;
 
 export const GreetingName = styled.Text`
   font-size: 22px;
   font-weight: bold;
-  color: #444;
+  color: ${Colors.lightBlack};
   width: 180px;
 `;
 
@@ -50,7 +52,7 @@ export const TitleContainer = styled.View`
 export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  color: #444;
+  color: ${Colors.lightBlack};
 `;
 
 export const FilterContainer = styled.View`
@@ -65,7 +67,7 @@ export const FilterButton = styled.TouchableOpacity`
   ${({ enabled }) =>
     enabled &&
     css`
-      border-color: #7d40e7;
+      border-color: ${Colors.purple};
       border-bottom-width: 1px;
       border-style: solid;
     `}
@@ -76,7 +78,7 @@ export const FilterButtonText = styled.Text`
   font-weight: bold;
   margin: auto;
   line-height: 15px;
-  color: ${({ enabled }) => (enabled ? '#7d40e7' : '#999')};
+  color: ${({ enabled }) => (enabled ? Colors.purple : Colors.gray)};
 `;
 
 export const DeliveryList = styled.FlatList.attrs({

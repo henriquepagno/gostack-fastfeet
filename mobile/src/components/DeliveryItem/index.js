@@ -16,11 +16,13 @@ import {
   DetailsButtonText,
 } from './styles';
 
-export default function DeliveryItem({ data }) {
+import Colors from '~/styles/Constants';
+
+export default function DeliveryItem({ data, onPressDetails }) {
   return (
     <Container>
       <TitleContainer>
-        <Icon name="truck" size={30} color="#7d40e7" />
+        <Icon name="truck" size={30} color={Colors.purple} />
         <Title>Encomenda {String(`0${data.id}`).slice(-2)}</Title>
       </TitleContainer>
 
@@ -35,7 +37,7 @@ export default function DeliveryItem({ data }) {
           <Label>Cidade</Label>
           <Data>{data.recipient.city}</Data>
         </DataContainer>
-        <DetailsButton onPress={() => {}}>
+        <DetailsButton onPress={() => onPressDetails()}>
           <DetailsButtonText>Ver detalhes</DetailsButtonText>
         </DetailsButton>
       </InfoContainer>
@@ -45,4 +47,5 @@ export default function DeliveryItem({ data }) {
 
 DeliveryItem.propTypes = {
   data: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  onPressDetails: PropTypes.func.isRequired,
 };

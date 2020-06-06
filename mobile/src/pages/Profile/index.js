@@ -17,6 +17,8 @@ import {
   DataContainer,
 } from './styles';
 
+import Colors from '~/styles/Constants';
+
 export default function Profile() {
   const dispatch = useDispatch();
 
@@ -37,7 +39,7 @@ export default function Profile() {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
       <Background>
         <Container>
           <Avatar
@@ -56,7 +58,7 @@ export default function Profile() {
           <LogoutButton
             loading={loading}
             onPress={handleLogout}
-            color="#e74040"
+            color={Colors.red}
           >
             Logout
           </LogoutButton>

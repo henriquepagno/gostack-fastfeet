@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 
 import { Container, Text } from './styles';
 
+import Colors from '~/styles/Constants';
+
 export default function Button({ children, loading, ...rest }) {
   return (
     <Container {...rest}>
       {loading ? (
-        <ActivityIndicator size="small" color="#fff" />
+        <ActivityIndicator size="small" color={Colors.white} />
       ) : (
         <Text>{children}</Text>
       )}

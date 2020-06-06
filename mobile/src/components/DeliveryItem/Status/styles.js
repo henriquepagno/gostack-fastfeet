@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import Colors from '~/styles/Constants';
+
 export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -17,7 +19,7 @@ export const Checkpoint = styled.View`
 export const Label = styled.Text`
   margin-top: 5px;
   font-size: 12px;
-  color: #666;
+  color: ${Colors.darkGray};
   width: 70px;
   justify-content: center;
   text-align: center;
@@ -26,14 +28,14 @@ export const Label = styled.Text`
 export const Point = styled.View`
   width: 12px;
   height: 12px;
-  background: ${({ reached }) => (reached ? '#7d40e7' : '#fff')};
-  border: 1px solid #7d40e7;
+  background: ${({ reached }) => (reached ? Colors.purple : Colors.white)};
+  border: 1px solid ${Colors.purple};
   border-radius: 11px;
 `;
 
 export const Connector = styled.View`
   padding: 0 50px;
-  background: #7d40e7;
+  background: ${Colors.purple};
   width: 260px;
   height: 1px;
   top: 5.5px;

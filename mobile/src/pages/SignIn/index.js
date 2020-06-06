@@ -14,6 +14,8 @@ import {
   SubmitButton,
 } from './styles';
 
+import Colors from '~/styles/Constants';
+
 export default function SignIn() {
   const dispatch = useDispatch();
 
@@ -27,7 +29,7 @@ export default function SignIn() {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#7d40e7" />
+      <StatusBar barStyle="light-content" backgroundColor={Colors.purple} />
       <Background>
         <Container>
           <LogoImage source={logo} />
@@ -41,7 +43,7 @@ export default function SignIn() {
           <SubmitButton
             loading={loading}
             onPress={handleSubmit}
-            color="#82bf18"
+            color={Colors.green}
           >
             Entrar no sistema
           </SubmitButton>

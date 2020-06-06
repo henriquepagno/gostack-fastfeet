@@ -4,9 +4,11 @@ import { Platform, Image } from 'react-native';
 import Button from '~/components/Button';
 import Input from '~/components/Input';
 
+import Colors from '~/styles/Constants';
+
 export const Background = styled.View`
   flex: 1;
-  background-color: #7d40e7;
+  background-color: ${Colors.purple};
 `;
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -20,7 +22,7 @@ export const Container = styled.KeyboardAvoidingView.attrs({
 `;
 
 export const LogoImage = styled(Image).attrs({
-  tintColor: '#fff',
+  tintColor: Colors.white,
 })`
   margin-bottom: 30px;
 `;
