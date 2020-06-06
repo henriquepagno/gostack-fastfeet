@@ -30,6 +30,11 @@ routes.get(
   GetDeliveryController.index
 );
 
+routes.put(
+  '/deliveries/withdrawal/:deliveryId',
+  WithdrawalDeliveryController.update
+);
+
 // Defines global authorization middleware to the following routes below.
 routes.use(authMiddleware);
 
@@ -54,11 +59,6 @@ routes.get('/deliveries/:id', DeliveryController.show);
 routes.post('/deliveries', DeliveryController.store);
 routes.put('/deliveries/:id', DeliveryController.update);
 routes.delete('/deliveries/:id', DeliveryController.delete);
-
-routes.put(
-  '/deliveries/withdrawal/:deliveryId',
-  WithdrawalDeliveryController.update
-);
 
 routes.put(
   '/deliveries/complete/:deliveryId',

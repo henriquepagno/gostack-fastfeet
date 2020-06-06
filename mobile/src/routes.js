@@ -1,18 +1,53 @@
-// import React from 'react';
+import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-// import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 
-// import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import SignIn from './pages/SignIn';
 
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 
-// import SelectProvider from './pages/New/SelectProvider';
-// import SelectDateTime from './pages/New/SelectDateTime';
-// import Confirm from './pages/New/Confirm';
+import Detail from './pages/Detail';
+
+import Colors from '~/styles/Constants';
+
+const defaultNavigationOptions = {
+  headerTransparent: true,
+  headerTintColor: Colors.white,
+  headerTitleAlign: 'center',
+  headerLeftContainerStyle: {
+    marginLeft: 20,
+  },
+};
+
+const bottomTabConfig = {
+  resetOnBlur: true,
+  tabBarOptions: {
+    keyboardHidesTabBar: true,
+    activeTintColor: Colors.purple,
+    inactiveTintColor: 'rgba(0, 0, 0, 0.6)',
+    labelStyle: {
+      fontSize: 14,
+    },
+    style: {
+      backgroundColor: Colors.white,
+      height: 60,
+      paddingTop: 5,
+      paddingBottom: 5,
+    },
+  },
+};
+
+const stackNavigationOptions = {
+  tabBarLabel: 'Entregas',
+  // eslint-disable-next-line react/prop-types
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="toc" size={30} color={tintColor} />
+  ),
+};
 
 export default (signedIn = false) =>
   createAppContainer(
@@ -21,26 +56,21 @@ export default (signedIn = false) =>
         Sign: SignIn,
         App: createBottomTabNavigator(
           {
-            Dashboard,
+            Dashboard: {
+              screen: createStackNavigator(
+                {
+                  Dashboard,
+                  Detail,
+                },
+                {
+                  defaultNavigationOptions,
+                }
+              ),
+              navigationOptions: stackNavigationOptions,
+            },
             Profile,
           },
-          {
-            resetOnBlur: true,
-            tabBarOptions: {
-              keyboardHidesTabBar: true,
-              activeTintColor: '#7d40e7',
-              inactiveTintColor: 'rgba(0, 0, 0, 0.6)',
-              labelStyle: {
-                fontSize: 14,
-              },
-              style: {
-                backgroundColor: '#fff',
-                height: 60,
-                paddingTop: 5,
-                paddingBottom: 5,
-              },
-            },
-          }
+          bottomTabConfig
         ),
       },
       {
@@ -48,62 +78,3 @@ export default (signedIn = false) =>
       }
     )
   );
-
-// export default (signedIn = false) =>
-//   createAppContainer(
-//     createSwitchNavigator(
-//       {
-//         Sign: createSwitchNavigator({ SignIn, SignUp }),
-//         App: createBottomTabNavigator(
-//           {
-//             Dashboard,
-//             New: {
-//               screen: createStackNavigator(
-//                 {
-//                   SelectProvider,
-//                   SelectDateTime,
-//                   Confirm,
-//                 },
-//                 {
-//                   defaultNavigationOptions: {
-//                     headerTransparent: true,
-//                     headerTintColor: '#fff',
-//                     headerTitleAlign: 'center',
-//                     headerLeftContainerStyle: {
-//                       marginLeft: 20,
-//                     },
-//                   },
-//                 }
-//               ),
-//               navigationOptions: {
-//                 tabBarVisible: false,
-//                 tabBarLabel: 'Agendar',
-//                 tabBarIcon: (
-//                   <Icon
-//                     name="add-circle-outline"
-//                     size={20}
-//                     color="rgba(255, 255, 255, 0.6)"
-//                   />
-//                 ),
-//               },
-//             },
-//             Profile,
-//           },
-//           {
-//             resetOnBlur: true,
-//             tabBarOptions: {
-//               keyboardHidesTabBar: true,
-//               activeTintColor: '#fff',
-//               inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
-//               style: {
-//                 backgroundColor: '#8d41a8',
-//               },
-//             },
-//           }
-//         ),
-//       },
-//       {
-//         initialRouteName: signedIn ? 'App' : 'Sign',
-//       }
-//     )
-//   );

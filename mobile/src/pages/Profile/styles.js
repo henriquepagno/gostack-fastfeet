@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
 import Button from '~/components/Button';
 
+import Colors from '~/styles/Constants';
+
 export const Background = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${Colors.white};
 `;
 
 export const Container = styled.SafeAreaView`
@@ -25,12 +27,12 @@ export const LogoutButton = styled(Button)`
 
 export const Label = styled.Text`
   font-size: 14px;
-  color: #666;
+  color: ${Colors.darkGray};
 `;
 
 export const Data = styled.Text`
   font-size: 22px;
   font-weight: bold;
-  color: #444;
+  color: ${Colors.lightBlack};
   margin-bottom: 15px;
 `;

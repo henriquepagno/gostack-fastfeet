@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar, ActivityIndicator, Alert } from 'react-native';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { parseISO, format } from 'date-fns';
 
@@ -30,7 +30,9 @@ import {
   DeliveryList,
 } from './styles';
 
-function Dashboard({ isFocused }) {
+import Colors from '~/styles/Constants';
+
+function Dashboard({ navigation }) {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.user.profile);
 
@@ -59,12 +61,18 @@ function Dashboard({ isFocused }) {
       const responseData = response.data.rows.map((row) => ({
         ...row,
         formattedDate: format(parseISO(row.createdAt), 'dd/MM/yyyy'),
+        formattedEndDate: row.end_date
+          ? format(parseISO(row.end_date), 'dd/MM/yyyy')
+          : '-- / -- / --',
+        formattedStartDate: row.start_date
+          ? format(parseISO(row.start_date), 'dd/MM/yyyy')
+          : '-- / -- / --',
       }));
 
       setDeliveries(page > 1 ? [...deliveries, ...responseData] : responseData);
       setTotalPages(response.data.totalPages);
     } catch (err) {
-      Alert(
+      Alert.alert(
         'Falha ao buscar as encomendas.',
         err.response
           ? err.response.data.error
@@ -98,16 +106,30 @@ function Dashboard({ isFocused }) {
     setPage(1);
   }
 
+  // useEffect(() => {
+  //   loadDeliveries();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [page, delivered]);
+
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     setPage(1);
+  //   }
+  // }, [isFocused]);
+
   useEffect(() => {
-    if (isFocused) {
-      loadDeliveries();
-    }
+    loadDeliveries();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocused, page, delivered]);
+  }, [page, delivered]);
+
+  useEffect(() => {
+    loadDeliveries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
       <Background>
         <Container>
           <ProfileContainer>
@@ -125,7 +147,7 @@ function Dashboard({ isFocused }) {
                 handleLogout();
               }}
             >
-              <Icon name="exit-to-app" size={30} color="#e74040" />
+              <Icon name="exit-to-app" size={30} color={Colors.red} />
             </LogoutButton>
           </ProfileContainer>
 
@@ -156,12 +178,19 @@ function Dashboard({ isFocused }) {
           </TitleContainer>
 
           {loading && page === 1 ? (
-            <ActivityIndicator color="#666" size={30} />
+            <ActivityIndicator color={Colors.darkGray} size={30} />
           ) : (
             <DeliveryList
               data={deliveries}
               keyExtractor={(item) => String(item.id)}
-              renderItem={({ item }) => <DeliveryItem data={item} />}
+              renderItem={({ item }) => (
+                <DeliveryItem
+                  data={item}
+                  onPressDetails={() =>
+                    navigation.navigate('Detail', { item, refreshList })
+                  }
+                />
+              )}
               refreshing={refreshing}
               onRefresh={refreshList}
               onEndReachedThreshold={0.3}
@@ -169,7 +198,7 @@ function Dashboard({ isFocused }) {
             />
           )}
           {loading && page !== 1 && (
-            <ActivityIndicator color="#666" size={30} />
+            <ActivityIndicator color={Colors.darkGray} size={30} />
           )}
         </Container>
       </Background>
@@ -177,16 +206,8 @@ function Dashboard({ isFocused }) {
   );
 }
 
-Dashboard.navigationOptions = {
-  tabBarLabel: 'Entregas',
-  // eslint-disable-next-line react/prop-types
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="toc" size={30} color={tintColor} />
-  ),
-};
-
 Dashboard.propTypes = {
-  isFocused: Proptypes.bool.isRequired,
+  navigation: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default withNavigationFocus(Dashboard);
