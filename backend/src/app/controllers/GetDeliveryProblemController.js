@@ -11,7 +11,7 @@ class GetDeliveryProblemController {
         delivery_id: deliveryId,
       },
       order: ['id'],
-      attributes: ['id', 'description'],
+      attributes: ['id', 'description', 'created_at'],
       limit: 8,
       offset: (page - 1) * 8,
     });

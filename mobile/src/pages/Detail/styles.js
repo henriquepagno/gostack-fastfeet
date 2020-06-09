@@ -3,20 +3,7 @@ import { RectButton } from 'react-native-gesture-handler';
 
 import Colors from '~/styles/Constants';
 
-export const Background = styled.View`
-  flex: 1;
-  background-color: ${Colors.white};
-  position: relative;
-`;
-
-export const HeaderBackground = styled.View`
-  position: absolute;
-  background: ${Colors.purple};
-  height: 155px;
-  width: 100%;
-`;
-
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
