@@ -7,8 +7,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import api from '~/services/api';
 
 import {
-  Background,
+  StackBackground as Background,
   HeaderBackground,
+} from '~/styles/globals';
+import {
   Container,
   InfoContainer,
   TitleContainer,
@@ -51,6 +53,18 @@ export default function Detail({ navigation }) {
     setStatus('Pendente');
     setConfirmDescription('Confirmar Retirada');
   }, [status, delivery.end_date, delivery.start_date]);
+
+  function handleNewProblem() {
+    if (delivery.end_date) return;
+
+    const { id: deliveryId } = delivery;
+    navigation.navigate('NewProblem', { deliveryId });
+  }
+
+  function handleProblem() {
+    const { id: deliveryId } = delivery;
+    navigation.navigate('Problem', { deliveryId });
+  }
 
   async function handleConfirm() {
     if (delivery.end_date) return;
@@ -127,11 +141,20 @@ export default function Detail({ navigation }) {
           </InfoContainer>
 
           <ButtonContainer>
-            <Button disabled={delivered}>
+            <Button
+              disabled={delivered}
+              onPress={() => {
+                handleNewProblem();
+              }}
+            >
               <Icon name="close-circle-outline" color={Colors.red} size={28} />
               <ButtonText>Informar Problema</ButtonText>
             </Button>
-            <Button>
+            <Button
+              onPress={() => {
+                handleProblem();
+              }}
+            >
               <Icon
                 name="information-outline"
                 color={Colors.yellow}

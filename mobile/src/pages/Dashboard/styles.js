@@ -2,11 +2,6 @@ import styled, { css } from 'styled-components/native';
 
 import Colors from '~/styles/Constants';
 
-export const Background = styled.View`
-  flex: 1;
-  background-color: ${Colors.white};
-`;
-
 export const Container = styled.View`
   flex: 1;
   justify-content: center;

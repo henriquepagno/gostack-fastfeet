@@ -14,8 +14,8 @@ import DeliveryItem from '~/components/DeliveryItem';
 
 import { signOut } from '~/store/modules/user/actions';
 
+import { StackBackground as Background } from '~/styles/globals';
 import {
-  Background,
   Container,
   ProfileContainer,
   GreetingContainer,
@@ -105,17 +105,6 @@ function Dashboard({ navigation }) {
     setDelivered(deliveryFilter);
     setPage(1);
   }
-
-  // useEffect(() => {
-  //   loadDeliveries();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [page, delivered]);
-
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     setPage(1);
-  //   }
-  // }, [isFocused]);
 
   useEffect(() => {
     loadDeliveries();
