@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import Detail from './pages/Detail';
 import NewProblem from './pages/NewProblem';
 import Problem from './pages/Problem';
+import Confirm from './pages/Confirm';
 
 import Colors from '~/styles/Constants';
 
@@ -65,6 +66,7 @@ export default (signedIn = false) =>
                   Detail,
                   NewProblem,
                   Problem,
+                  Confirm,
                 },
                 {
                   defaultNavigationOptions,

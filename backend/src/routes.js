@@ -42,6 +42,17 @@ routes.get(
   GetDeliveryProblemController.index
 );
 
+routes.post(
+  '/deliveries/:deliveryId/signature',
+  upload.single('file'),
+  SignatureController.store
+);
+
+routes.put(
+  '/deliveries/complete/:deliveryId',
+  CompleteDeliveryController.update
+);
+
 // Defines global authorization middleware to the following routes below.
 routes.use(authMiddleware);
 
@@ -67,11 +78,6 @@ routes.post('/deliveries', DeliveryController.store);
 routes.put('/deliveries/:id', DeliveryController.update);
 routes.delete('/deliveries/:id', DeliveryController.delete);
 
-routes.put(
-  '/deliveries/complete/:deliveryId',
-  CompleteDeliveryController.update
-);
-
 routes.delete(
   '/problem/:deliveryProblemId/cancel-delivery',
   DeliveryProblemController.delete
@@ -86,12 +92,6 @@ routes.post(
   '/deliverymen/:deliverymanId/avatar',
   upload.single('file'),
   AvatarController.store
-);
-
-routes.post(
-  '/deliveries/:deliveryId/signature',
-  upload.single('file'),
-  SignatureController.store
 );
 
 export default routes;

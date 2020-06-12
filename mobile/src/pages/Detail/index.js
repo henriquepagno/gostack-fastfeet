@@ -70,7 +70,7 @@ export default function Detail({ navigation }) {
     if (delivery.end_date) return;
 
     if (delivery.start_date) {
-      navigation.navigate('Confirm', { id: delivery.id });
+      navigation.navigate('Confirm', { deliveryId: delivery.id });
       return;
     }
 
