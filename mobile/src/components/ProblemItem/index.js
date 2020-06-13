@@ -14,5 +14,5 @@ export default function ProblemItem({ description, date }) {
 
 ProblemItem.propTypes = {
   description: PropTypes.string.isRequired,
-  date: PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.string.isRequired,
 };

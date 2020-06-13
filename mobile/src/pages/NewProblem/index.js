@@ -46,7 +46,6 @@ export default function NewProblem({ navigation }) {
           placeholder="Inclua aqui o problema que ocorreu na entrega."
           returnKeyType="send"
           multiline
-          onSubmitEditing={handleSubmit}
           value={description}
           onChangeText={setDescription}
         />
