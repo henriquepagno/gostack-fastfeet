@@ -51,6 +51,7 @@ export default function Confirm({ navigation }) {
 
       await api.post(`/deliveries/${deliveryId}/signature`, data, {
         headers: {
+          Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
       });
