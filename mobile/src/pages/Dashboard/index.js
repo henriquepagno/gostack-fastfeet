@@ -195,6 +195,10 @@ function Dashboard({ navigation }) {
   );
 }
 
+Dashboard.navigationOptions = () => ({
+  title: null,
+});
+
 Dashboard.propTypes = {
   navigation: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };

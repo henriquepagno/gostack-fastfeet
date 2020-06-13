@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,13 +17,14 @@ import Colors from '~/styles/Constants';
 
 export default function Confirm({ navigation }) {
   const deliveryId = navigation.getParam('deliveryId');
+  const refreshList = navigation.getParam('refreshList');
   const profile = useSelector((state) => state.user.profile);
 
   const [image, setImage] = useState();
 
   async function takePicture(camera) {
     if (camera) {
-      const options = { quality: 0.2, base64: true };
+      const options = { quality: 0.5, base64: true };
       const data = await camera.takePictureAsync(options);
       setImage(data.uri);
     }
@@ -43,13 +45,17 @@ export default function Confirm({ navigation }) {
         type: `image/${fileType}`,
       });
 
+      await api.put(`/deliveries/complete/${deliveryId}`, {
+        deliverymanId: profile.id,
+      });
+
       await api.post(`/deliveries/${deliveryId}/signature`, data, {
         headers: {
-          Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
       });
 
+      refreshList();
       navigation.navigate('Dashboard');
     } catch (err) {
       Alert.alert(
@@ -100,3 +106,7 @@ Confirm.navigationOptions = ({ navigation }) => ({
     </TouchableOpacity>
   ),
 });
+
+Confirm.propTypes = {
+  navigation: PropTypes.oneOfType([PropTypes.object]).isRequired,
+};

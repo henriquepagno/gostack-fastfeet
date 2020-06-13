@@ -22,7 +22,7 @@ export const GreetingContainer = styled.View`
 `;
 
 export const Greeting = styled.Text`
-  color: ${Colors.gray};
+  color: ${Colors.darkGray};
   font-size: 14px;
 `;
 
