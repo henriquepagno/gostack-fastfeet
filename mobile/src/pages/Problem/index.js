@@ -15,6 +15,7 @@ import {
 import { Container, Title, ProblemList } from './styles';
 
 import Colors from '~/styles/Constants';
+import EmptyList from '~/components/EmptyList';
 
 export default function Problem({ navigation }) {
   const deliveryId = navigation.getParam('deliveryId');
@@ -90,20 +91,23 @@ export default function Problem({ navigation }) {
         {loading && page === 1 ? (
           <ActivityIndicator color={Colors.darkGray} size={30} />
         ) : (
-          <ProblemList
-            data={problems}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={({ item }) => (
-              <ProblemItem
-                description={item.description}
-                date={item.formattedDate}
-              />
-            )}
-            refreshing={refreshing}
-            onRefresh={refreshList}
-            onEndReachedThreshold={0.3}
-            onEndReached={loadMore}
-          />
+          <>
+            <EmptyList data={problems.length > 0} />
+            <ProblemList
+              data={problems}
+              keyExtractor={(item) => String(item.id)}
+              renderItem={({ item }) => (
+                <ProblemItem
+                  description={item.description}
+                  date={item.formattedDate}
+                />
+              )}
+              refreshing={refreshing}
+              onRefresh={refreshList}
+              onEndReachedThreshold={0.3}
+              onEndReached={loadMore}
+            />
+          </>
         )}
         {loading && page !== 1 && (
           <ActivityIndicator color={Colors.darkGray} size={30} />

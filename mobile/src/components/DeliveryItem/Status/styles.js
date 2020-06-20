@@ -36,7 +36,7 @@ export const Point = styled.View`
 export const Connector = styled.View`
   padding: 0 50px;
   background: ${Colors.purple};
-  width: 260px;
+  width: 78%;
   height: 1px;
   top: 5.5px;
   left: 35px;
