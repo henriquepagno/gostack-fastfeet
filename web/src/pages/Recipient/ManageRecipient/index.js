@@ -135,7 +135,7 @@ export default function ManageRecipient() {
             <Input
               name="complement"
               type="text"
-              label="Complement"
+              label="Complemento"
               placeholder="Complemento"
             />
           </ContentWrapper>

@@ -31,6 +31,7 @@ import {
 } from './styles';
 
 import Colors from '~/styles/Constants';
+import EmptyList from '~/components/EmptyList';
 
 function Dashboard({ navigation }) {
   const dispatch = useDispatch();
@@ -169,22 +170,25 @@ function Dashboard({ navigation }) {
           {loading && page === 1 ? (
             <ActivityIndicator color={Colors.darkGray} size={30} />
           ) : (
-            <DeliveryList
-              data={deliveries}
-              keyExtractor={(item) => String(item.id)}
-              renderItem={({ item }) => (
-                <DeliveryItem
-                  data={item}
-                  onPressDetails={() =>
-                    navigation.navigate('Detail', { item, refreshList })
-                  }
-                />
-              )}
-              refreshing={refreshing}
-              onRefresh={refreshList}
-              onEndReachedThreshold={0.3}
-              onEndReached={loadMore}
-            />
+            <>
+              <EmptyList data={deliveries.length > 0} />
+              <DeliveryList
+                data={deliveries}
+                keyExtractor={(item) => String(item.id)}
+                renderItem={({ item }) => (
+                  <DeliveryItem
+                    data={item}
+                    onPressDetails={() =>
+                      navigation.navigate('Detail', { item, refreshList })
+                    }
+                  />
+                )}
+                refreshing={refreshing}
+                onRefresh={refreshList}
+                onEndReachedThreshold={0.3}
+                onEndReached={loadMore}
+              />
+            </>
           )}
           {loading && page !== 1 && (
             <ActivityIndicator color={Colors.darkGray} size={30} />

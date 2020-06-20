@@ -22,7 +22,6 @@ export function* signIn({ payload }) {
 }
 
 export function* getUser({ payload }) {
-  console.tron.log('payload', payload);
   if (!payload.user.profile) {
     return;
   }

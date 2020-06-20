@@ -12,7 +12,10 @@ export default function RecipientsBody({ data, handleEdit, handleDelete }) {
         <tr key={recipients.id}>
           <td>#{String(`0${recipients.id}`).slice(-2)}</td>
           <td>{recipients.name}</td>
-          <td>{recipients.name}</td>
+          <td>
+            {recipients.street}, {recipients.number}, {recipients.city} -{' '}
+            {recipients.state}
+          </td>
           <td>
             <ActionsMenu>
               <button type="button" onClick={() => handleEdit(recipients.id)}>
