@@ -33,22 +33,9 @@
 </p>
 <br>
 
-<h3 align="center">
-  Gifs
-</h3>
-
-<h4 align="center">
-  Web
-</h4>
-
 <p align="center">
   <img src="/screenshots/fastfeet_web.gif" alt="Web"/>
 </p>
-
-<h4 align="center">
-  Mobile
-</h4>
-
 
 <p align="center">
   <img src="/screenshots/fastfeet_mobile.gif" alt="Mobile"/>
