@@ -27,3 +27,4 @@ yarn-error.log*
 
 # ignore temporary folder files
 /tmp/uploads/*
+!/tmp/uploads/.keep
