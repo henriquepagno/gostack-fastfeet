@@ -27,11 +27,11 @@ export default function ActionsMenu({ children }) {
 
   return (
     <Container ref={actionsMenuRef}>
-      <ButtonWrapper onClick={handleToggleVisible}>
+      <ButtonWrapper data-testid="button-wrapper" onClick={handleToggleVisible}>
         <BsThreeDots size={22} color="#b2b2b2" />
       </ButtonWrapper>
 
-      <ActionList visible={visible}>
+      <ActionList data-testid="action-list" visible={visible}>
         <ActionContainer>{children}</ActionContainer>
       </ActionList>
     </Container>

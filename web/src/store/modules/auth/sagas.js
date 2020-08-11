@@ -26,8 +26,6 @@ export function* signIn({ payload }) {
 }
 
 export function setToken({ payload }) {
-  if (!payload) return;
-
   const { token } = payload.auth;
 
   if (token) {
