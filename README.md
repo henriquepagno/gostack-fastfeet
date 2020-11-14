@@ -105,7 +105,7 @@ docker start imageName
 Now clone the repository and install the dependencies.
 ```bash
 # to clone the repository
-git clone https://github.com/henriquepagno/goBarber.git
+git clone https://github.com/henriquepagno/gostack-fastfeet.git
 
 # go into the backend folder
 cd backend
