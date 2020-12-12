@@ -14,7 +14,7 @@
 </p>
 
 <p>
-  Fastfeet is a delivery manage app on which the company can control deliveries, delirymen and recipients.
+  Fastfeet is a delivery manage app on which the company can control deliveries, deliverymen and recipients.
   The application is divided in three modules:
   <ul>
     <li>Backend developed in NodeJS</li>
